@@ -1,7 +1,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include <cstdlib>
+#include <cstdlib> //rand()
+#include "../fibonacci/fib.h" //fibSearch()
 
 using Rank=int;
 
@@ -13,11 +14,12 @@ class Vector{ //向量模板类
     Rank _size; //规模
 
   protected:
+    Rank binSearch(T *S,const T &e,Rank lo,Rank hi) const; //二分查找a
+    Rank fibSearch(T *S,const T &e,Rank lo,Rank hi) const; //斐波那契查找
+    Rank binSearch_b(T *S,const T &e,Rank lo,Rank hi) const; //二分查找b
+    Rank binSearch_c(T *S,const T &e,Rank lo,Rank hi) const; //二分查找c
     
-    Rank binSearch(T *S,const T &e,Rank lo,Rank hi) const;
-    Rank fibSearch(T *S,const T &e,Rank lo,Rank hi) const;
-    Rank binSearch_b(T *S,const T &e,Rank lo,Rank hi) const;
-    Rank binSearch_c(T *S,const T &e,Rank lo,Rank hi) const;
+
   public:
     Rank search(const T &e) const{
       return search(e,0,_size)
@@ -26,6 +28,7 @@ class Vector{ //向量模板类
     // 后面const修饰的是隐式参数 this 指针
     // 约束的是：这个成员函数内部，不能修改当前对象的任何成员变量。
     Rank search(const T &e,Rank lo,Rank hi) const; //区间查找
+    void sort(Rank lo, Rank hi); void sort() { sort( 0, _size ); } //排序
 
 };
 
