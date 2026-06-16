@@ -1,6 +1,17 @@
 #include<iostream>
 using namespace std;
 using ll=long long;
+using Rank=unsigned;
+
+class Fib{
+private:
+  Rank f,g;
+public:
+  Fib(Rank n){
+    f=1,g=0;
+    while(g<n) next;
+  }
+}
 
 ll M[90];
 
