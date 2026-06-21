@@ -7,6 +7,13 @@
 using Rank=int;
 
 template<typename T>
+void swap(T& a,T& b){
+  T temp=a;
+  a=b;
+  b=temp;
+}
+
+template<typename T>
 class Vector{ //向量模板类
   private:
     T* _elem; //数据区
@@ -18,7 +25,7 @@ class Vector{ //向量模板类
     Rank fibSearch(T *S,const T &e,Rank lo,Rank hi) const; //斐波那契查找
     Rank binSearch_b(T *S,const T &e,Rank lo,Rank hi) const; //二分查找b
     Rank binSearch_c(T *S,const T &e,Rank lo,Rank hi) const; //二分查找c
-    
+    void bubbleSort(Rank lo,Rank hi); //起泡排序
 
   public:
     Rank search(const T &e) const{
@@ -29,7 +36,7 @@ class Vector{ //向量模板类
     // 约束的是：这个成员函数内部，不能修改当前对象的任何成员变量。
     Rank search(const T &e,Rank lo,Rank hi) const; //区间查找
     void sort(Rank lo, Rank hi); void sort() { sort( 0, _size ); } //排序
-
+     
 };
 
 
