@@ -26,6 +26,8 @@ class Vector{ //向量模板类
     Rank binSearch_b(T *S,const T &e,Rank lo,Rank hi) const; //二分查找b
     Rank binSearch_c(T *S,const T &e,Rank lo,Rank hi) const; //二分查找c
     void bubbleSort(Rank lo,Rank hi); //起泡排序
+    void merge(Rank lo,Rank mi,Rank hi); //二路归并
+    void mergeSort(Rank lo,Rank hi); //归并排序
 
   public:
     Rank search(const T &e) const{

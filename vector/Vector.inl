@@ -84,3 +84,25 @@ void Vector<T>::bubbleSort(Rank lo,Rank hi){
         swap(_elem[i-1],_elem[i]),last=i;
   }
 }
+
+template<typename T>
+void Vector<T>::mergeSort(Rank lo,Rank hi){
+  if(hi-lo<2) return;
+  Rank mi=(lo+hi)/2;
+  mergeSort(lo,mi);mergeSort(mi,hi);
+  merge(lo,mi,hi);
+} //最好、最坏、平均的时间复杂度均为O(nlogn)
+
+template<typename T>
+void Vector<T>::merge(Rank lo,Rank mi,Rank hi){
+  T* S=_elem+lo;
+  Rank la=mi-lo; T* A=new T[la]; //A[0,la)是S的前缀
+  for(Rank i=0;i<la;i++) A[i]=S[i];
+  Rank lb=hi-mi; T* B=S+la; //B[0,lb)是S的后缀
+  Rank a,b,s=0;//a：A的读取指针；b：B的读取指针；s：S的写入指针
+  while((a<la)&&(b<lb)){
+    S[s++]=(A[a]<=B[b])?A[a++]:B[b++];
+  }
+  while(a<la) S[s++]=A[a++]; //若B先耗尽
+  delete[] A;
+}
