@@ -22,9 +22,9 @@ class Vector{ //向量模板类
 
   protected:
     Rank binSearch(T *S,const T &e,Rank lo,Rank hi) const; //二分查找a
-    Rank fibSearch(T *S,const T &e,Rank lo,Rank hi) const; //斐波那契查找
     Rank binSearch_b(T *S,const T &e,Rank lo,Rank hi) const; //二分查找b
     Rank binSearch_c(T *S,const T &e,Rank lo,Rank hi) const; //二分查找c
+    Rank fibSearch(T *S,const T &e,Rank lo,Rank hi) const; //斐波那契查找
     void bubbleSort(Rank lo,Rank hi); //起泡排序
     void merge(Rank lo,Rank mi,Rank hi); //二路归并
     void mergeSort(Rank lo,Rank hi); //归并排序

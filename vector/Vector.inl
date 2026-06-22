@@ -83,14 +83,14 @@ void Vector<T>::bubbleSort(Rank lo,Rank hi){
       if(_elem[i-1]>_elem[i])
         swap(_elem[i-1],_elem[i]),last=i;
   }
-}
+} //时间复杂度最优O(n)、最坏O(n^2)、平均O(n^2)
 
 template<typename T>
 void Vector<T>::mergeSort(Rank lo,Rank hi){
   if(hi-lo<2) return;
   Rank mi=(lo+hi)/2;
   mergeSort(lo,mi);mergeSort(mi,hi);
-  merge(lo,mi,hi);
+  merge(lo,mi,hi); //O(n)
 } //最好、最坏、平均的时间复杂度均为O(nlogn)
 
 template<typename T>
