@@ -1,6 +1,6 @@
 #ifndef VECTOR_H
 #include "Vector.h"
-#endif
+#endif //防止编译器报错
 
 template<typename T>
 Rank Vector<T>::search(const T &e,Rank lo,Rank hi) const{
@@ -81,7 +81,7 @@ void Vector<T>::bubbleSort(Rank lo,Rank hi){
     last=lo;
     for(Rank i=lo+1;i<hi;i++)
       if(_elem[i-1]>_elem[i])
-        swap(_elem[i-1],_elem[i]),last=i;
+        std::swap(_elem[i-1],_elem[i]),last=i;
   }
 } //时间复杂度最优O(n)、最坏O(n^2)、平均O(n^2)
 
@@ -99,10 +99,44 @@ void Vector<T>::merge(Rank lo,Rank mi,Rank hi){
   Rank la=mi-lo; T* A=new T[la]; //A[0,la)是S的前缀
   for(Rank i=0;i<la;i++) A[i]=S[i];
   Rank lb=hi-mi; T* B=S+la; //B[0,lb)是S的后缀
-  Rank a,b,s=0;//a：A的读取指针；b：B的读取指针；s：S的写入指针
+  Rank a=0,b=0,s=0;//a：A的读取指针；b：B的读取指针；s：S的写入指针
   while((a<la)&&(b<lb)){
     S[s++]=(A[a]<=B[b])?A[a++]:B[b++];
   }
   while(a<la) S[s++]=A[a++]; //若B先耗尽
   delete[] A;
+}
+
+template<typename T>
+void Vector<T>::merge(Rank lo,Rank mi,Rank hi,ll& invCount){
+  T* S=_elem+lo;
+  Rank la=mi-lo; T* A=new T[la];
+  for(Rank i=0;i<la;i++) A[i]=S[i];
+  Rank lb=hi-mi; T* B=S+la;
+  Rank a=0,b=0,s=0;
+  while((a<la)&&(b<lb)){
+    if(A[a]<=B[b]) S[s++]=A[a++];
+    else {
+      invCount+=la-a;
+      S[s++]=B[b++];
+    }
+  }
+  while(a<la) S[s++]=A[a++];
+  delete[] A;
+}
+
+template<typename T>
+void Vector<T>::mergeSort(Rank lo,Rank hi,ll& invCount){
+  if(hi-lo<2) return;
+  Rank mi=(lo+hi)/2;
+  mergeSort(lo,mi,invCount);
+  mergeSort(mi,hi,invCount);
+  merge(lo,mi,hi,invCount);
+}
+
+template<typename T>
+ll Vector<T>::countInversion(Rank lo,Rank hi){
+  ll cnt=0;
+  mergeSort(lo,hi,cnt);
+  return cnt;
 }
